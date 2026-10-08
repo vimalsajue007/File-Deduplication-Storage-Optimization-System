@@ -1,0 +1,75 @@
+:root {
+  --wine-950: #12040a;
+  --wine-900: #1d0710;
+  --wine-800: #3b0a17;
+  --wine-700: #5a1226;
+  --burgundy: #7b1e3a;
+  --claret: #a82a4d;
+  --garnet: #c9506b;
+  --champagne: #e9cfae;
+  --blush: #f7ebe8;
+  --mist: #c9a9ad;
+  --glass-fill: linear-gradient(135deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.04));
+  --glass-border: rgba(255, 255, 255, 0.14);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--blush);
+  font-family: "Manrope", system-ui, sans-serif;
+  background:
+    radial-gradient(1100px 700px at 8% -8%, rgba(181, 56, 79, 0.42), transparent 60%),
+    radial-gradient(900px 650px at 100% 6%, rgba(123, 30, 58, 0.55), transparent 55%),
+    radial-gradient(900px 700px at 55% 125%, rgba(233, 207, 174, 0.1), transparent 60%),
+    var(--wine-950);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  html { background-color: #12040a; }
+}
+
+/* The one reusable surface: frosted burgundy glass */
+.glass {
+  background: var(--glass-fill);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 34px rgba(10, 0, 4, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  border-radius: 20px;
+}
+
+.glass-strong {
+  background: linear-gradient(135deg, rgba(74, 14, 33, 0.82), rgba(34, 6, 16, 0.78));
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 24px 70px rgba(5, 0, 2, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.display-font { font-family: "Fraunces", Georgia, serif; font-feature-settings: "lnum" 1; }
+
+::selection { background: rgba(201, 80, 107, 0.5); }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.16); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+:focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* Reclaimable-storage meter: one gentle sheen on first paint */
+@keyframes sheen {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(220%); }
+}
+.meter-sheen { position: relative; overflow: hidden; }
+.meter-sheen::after {
+  content: "";
+  position: absolute; inset: 0; width: 40%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: sheen 1.6s ease-out 0.4s 1 both;
+}
